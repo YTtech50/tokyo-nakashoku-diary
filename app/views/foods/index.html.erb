@@ -1,7 +1,7 @@
 <%= render "shared/header" %>
 <div class='main'>
 
-  <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
+  <%# 画面上部の帯部分 %>
   <div class='title-contents'>
     <h2 class='service-title'>
       いつ、何食べた？
@@ -17,10 +17,10 @@
       <%= link_to image_tag("dl-android.png", class:"google-btn"), "#" %>
     </div>
   </div>
-  <%# /画面上部の「人生を変えるフリマアプリ」帯部分  %>
+  <%# /画面上部の帯部分  %>
 
 
-  <%# FURIMAの特徴 %>
+  <%# 東ナカの特徴 %>
   <div class='feature-contents'>
     <h2 class='title'>
       東ナカの特徴
@@ -55,12 +55,12 @@
       </li>
     </ul>
   </div>
-  <%# /FURIMAの特徴 %>
+  <%# /東ナカの特徴 %>
 
-  <%# 商品一覧 %>
+  <%# 記事一覧 %>
   <div class='food-contents'>
     <h2 class='title'>注目のナカ食</h2>
-    <%= link_to '新着ナカ食', "#", class: "subtitle" %>
+    <%= link_to '今週の新着ナカ食', "#", class: "subtitle" %>
     <ul class='food-lists'>
       <% if @newfoods.presence %>
         <% @newfoods.each do |food| %>
@@ -68,6 +68,11 @@
            <%= link_to food_path(food.id), method: :get do %>
              <div class='food-img-content'>
                <%= image_tag food.image, class: "food-img" if food.image.attached? %>
+
+                 <div class='new'>
+                   <span>New</span>
+                 </div>
+
                <div class=food-name>
                  <span><%= food.user.name %>さん</span>
                </div>
@@ -92,7 +97,7 @@
         <% end %>
       <% end %>  
 
-       <%# 商品がない場合のダミー %>
+       <%# 記事がない場合のダミー %>
     <% unless @newfoods.presence %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -112,7 +117,7 @@
         <% end %>
       </li>
     <% end %>
-      <%# /商品がない場合のダミー %>
+      <%# /記事がない場合のダミー %>
     </ul>
      <%= link_to '高評価ナカ食', "#", class: "subtitle" %>
     <ul class='food-lists'>
@@ -122,6 +127,11 @@
            <%= link_to food_path(food.id), method: :get do %>
              <div class='food-img-content'>
                <%= image_tag food.image, class: "food-img" if food.image.attached? %>
+
+               <div class='hi-score'>
+                   <span>満点</span>
+                </div>
+
                <div class=food-name>
                  <span><%= food.user.name %>さん</span>
                </div>
@@ -146,7 +156,7 @@
         <% end %>
       <% end %>  
 
-       <%# 商品がない場合のダミー %>
+       <%# 記事がない場合のダミー %>
     <% unless @goodfoods.presence %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -166,15 +176,15 @@
         <% end %>
       </li>
     <% end %>
-      <%# /商品がない場合のダミー %>
+      <%# /記事がない場合のダミー %>
     </ul>
   </div>
-  <%# /商品一覧 %>
+  <%# /記事一覧 %>
 </div>
 <div class='purchase-btn'>
   <span class='purchase-btn-text'>投稿する</span>
   <a href="/foods/new">
-    <%= image_tag 'folk_knife_icon.png' , size: '200x50' ,class: "purchase-btn-icon" %>
+    <%= image_tag 'folk_knife_icon.png' , size: '200x55' ,class: "purchase-btn-icon" %>
   </a>
 </div>
 <%= render "shared/footer" %>

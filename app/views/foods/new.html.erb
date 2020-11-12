@@ -9,9 +9,9 @@
     <h2 class="foods-sell-title">料理の情報を入力してください</h2>
     <%= form_with(model: @food, local: true) do |f| %>
 
-    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにする。%>
     <%= render 'shared/error_messages', model: f.object %>
-    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにする。%>
 
     <%# 料理画像 %>
     <div class="img-upload">
@@ -135,18 +135,13 @@
     <%# 注意書き %>
     <div class="caution">
       <p class="sentence">
-        <a href="#">禁止されている出品、</a>
+        <a href="#">禁止されている</a>
         <a href="#">行為</a>
         を必ずご確認ください。
       </p>
       <p class="sentence">
-        またブランド品でシリアルナンバー等がある場合はご記載ください。
-        <a href="#">偽ブランドの販売</a>
-        は犯罪であり処罰される可能性があります。
-      </p>
-      <p class="sentence">
-        また、出品をもちまして
-        <a href="#">加盟店規約</a>
+        また、投稿をもちまして
+        <a href="#">投稿規約</a>
         に同意したことになります。
       </p>
     </div>
@@ -163,12 +158,11 @@
   <footer class="foods-sell-footer">
     <ul class="menu">
       <li><a href="#">プライバシーポリシー</a></li>
-      <li><a href="#">フリマ利用規約</a></li>
-      <li><a href="#">特定商取引に関する表記</a></li>
+      <li><a href="#">東ナカ利用規約</a></li>
     </ul>
     <%= link_to image_tag('tnd_logo.png' , size: '210x30'), "/" %>
     <p class="inc">
-      ©︎Furima,Inc.
+      ©︎東京ナカ食DIARY
     </p>
   </footer>
 </div>
