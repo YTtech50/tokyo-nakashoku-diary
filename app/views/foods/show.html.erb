@@ -1,0 +1,112 @@
+<%= render "shared/header" %>
+
+<%# 購入した料理の概要 %>
+<div class="food-show">
+  <div class="food-box">
+    <h2 class="name">
+      <%= @food.start_time %>
+    </h2>
+    <h3 class="name">
+      <%= @food.food_name %>
+    </h3>
+    <div class='food-img-content'>
+      <%= image_tag @food.image ,class:"food-box-img" %>
+    </div>
+    <div class="food-price-box">
+      <span class="food-price">
+        ￥<%= @food.price %>
+      </span>
+      <span class="food-postage">
+        (税込み)
+      </span>
+      <span class="food-calorie">
+        <%= @food.calorie %>Kcal
+      </span>
+    </div>
+
+    <div class="food-explain-box">
+      <span><%= @food.review %></span>
+    </div>
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-food">購入者</th>
+          <td class="detail-value"><%= link_to @food.user.name, user_path(@food.user) %></td>
+        </tr>
+        <tr>
+          <th class="detail-food">レストラン名</th>
+          <td class="detail-value"><%= @food.restaurant %></td>
+        </tr>
+        <tr>
+          <th class="detail-food">カテゴリー</th>
+          <td class="detail-value"><%= @food.category.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-food">購入した地域</th>
+          <td class="detail-value"><%= @food.area.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-food">販売形態</th>
+          <td class="detail-value"><%= @food.business_form.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-food">評価</th>
+          <td class="detail-value"><%= @food.evaluation.name %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="option">
+      <div class="favorite-btn">
+        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り 0</span>
+      </div>
+      <div class="report-btn">
+        <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
+        <span>不適切なナカ食の通報</span>
+      </div>
+    </div>
+    <% if user_signed_in? %>
+      <% if current_user.id == @food.user_id %>
+          <%= link_to 'この日記を編集', edit_food_path(@food.id), method: :get, class: "food-red-btn" %>
+          <p class='or-text'>or</p>
+          <%= link_to 'この日記を削除', food_path(@food.id), method: :delete, class:'food-destroy' %>
+      <% else %>
+          <%= link_to '他の人も食べてる？', "#", class:"food-red-btn"%>
+      <% end %>
+    <% end %>
+  </div>
+  <%# /購入した料理の概要 %>
+
+  <div class="comment-box">
+    <div class="comments">
+      <h3>⭐️このナカ食へのコメント⭐️</h3>
+      <% if @comments %>
+        <% @comments.each do |comment| %>
+          <p>
+            <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>：</strong>
+            <%= comment.text %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+    <% if current_user %>
+      <%= form_with(model: [@food, @comment], local: true) do |form| %>
+        <%= form.text_area :text, class:"comment-text", placeholder: "このナカ食へのコメントを記入", rows: "2" %>
+        <%= form.submit "コメントを送信", class:"comment-btn" %>
+      <% end %>
+    <% else %>
+      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+    <% end %>
+  </div>
+  <div class="links">
+    <a href="#" class="change-food-btn">
+      ＜ 前のナカ食
+    </a>
+    <a href="#" class="change-food-btn">
+      後ろのナカ食 ＞
+    </a>
+  </div>
+  <a href="#" class='another-food'><%= @food.category.name %>をもっと見る</a>
+</div>
+
+<%= render "shared/footer" %>

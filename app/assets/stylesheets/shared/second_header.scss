@@ -1,0 +1,17 @@
+.second-header {
+  width: 100%;
+  min-width: 800px;
+  height: 200px;
+  background-image: image-url('pizza_image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.second-logo {
+  width: 280px;
+  height: 40px;
+}

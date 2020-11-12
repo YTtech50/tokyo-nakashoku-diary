@@ -1,0 +1,25 @@
+<%= render "shared/header" %>
+
+<div class="food-show">
+  <div class="food-box">
+    <div class="mypage-username">
+      <p><%= @name %>さんの日記</p>
+    </div>
+    <div class="food-cost">
+     <p>今月の出費：<%= @foods.all.sum(:price) %>円</p>
+   </div>
+    <div class="calendar">
+      <%= month_calendar events: @foods do |date, foods| %>
+         <%= date.day %>
+
+         <% foods.each do |food| %>
+           <div>
+            <%= link_to food.food_name, food %>
+           </div>
+         <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render "shared/footer" %>

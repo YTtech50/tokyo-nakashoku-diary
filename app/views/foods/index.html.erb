@@ -1,0 +1,180 @@
+<%= render "shared/header" %>
+<div class='main'>
+
+  <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
+  <div class='title-contents'>
+    <h2 class='service-title'>
+      いつ、何食べた？
+    </h2>
+    <p class='service-explain'>
+      東ナカはだれでもかんたんに投稿・検索できる
+    </p>
+    <p class='service-explain'>
+      美味しいお店探しのアプリです
+    </p>
+    <div class='store-btn'>
+      <%= link_to image_tag("https://linkmaker.itunes.apple.com/ja-jp/badge-lrg.svg?releaseDate=2011-09-21&kind=iossoftware&bubble=ios_apps", class:"apple-btn"), "#" %>
+      <%= link_to image_tag("dl-android.png", class:"google-btn"), "#" %>
+    </div>
+  </div>
+  <%# /画面上部の「人生を変えるフリマアプリ」帯部分  %>
+
+
+  <%# FURIMAの特徴 %>
+  <div class='feature-contents'>
+    <h2 class='title'>
+      東ナカの特徴
+    </h2>
+    <ul class='feature-lists'>
+      <li class='list'>
+        <%= image_tag "スマホ投稿.png", class:"list-pict" %>
+        <h3 class='feature-list-text'>
+          簡単に投稿できる
+        </h3>
+        <p class='feature-list-description'>
+          スマホひとつで、いつでもどこでも簡単に投稿・検索が可能！
+        </p>
+      </li>
+      <li class='list'>
+        <%= image_tag "kakeibo.png", class:"list-pict" %>
+        <h3 class='feature-list-text'>
+          日記、家計簿として使える
+        </h3>
+        <p class='feature-list-description'>
+          自分の食事の傾向、使った食費が一目瞭然にわかる！
+        </p>
+      </li>
+      <li class='list'>
+        <%= image_tag "検索アイコン.png", class:"list-pict" %>
+        <h3 class='feature-list-text'>
+          食べたい物がすぐ見つかる
+        </h3>
+        <p class='feature-list-description'>
+          自分が"今"いる場所で"今"食べたいものがすぐに見つかる！
+        </p>
+      </li>
+    </ul>
+  </div>
+  <%# /FURIMAの特徴 %>
+
+  <%# 商品一覧 %>
+  <div class='food-contents'>
+    <h2 class='title'>注目のナカ食</h2>
+    <%= link_to '新着ナカ食', "#", class: "subtitle" %>
+    <ul class='food-lists'>
+      <% if @newfoods.presence %>
+        <% @newfoods.each do |food| %>
+         <li class='list'>
+           <%= link_to food_path(food.id), method: :get do %>
+             <div class='food-img-content'>
+               <%= image_tag food.image, class: "food-img" if food.image.attached? %>
+               <div class=food-name>
+                 <span><%= food.user.name %>さん</span>
+               </div>
+             </div>
+             <div class='food-info'>
+               <h3 class='food-name'>
+                 <%= food.food_name %>
+               </h3>
+               <h4 class='food-name'>
+                 <%= food.restaurant %>
+               </h4> 
+               <div class='food-price'>
+                 <span><%= food.price %>円<br>(税込み)</span>
+                 <div class='star-btn'>
+                   <%= image_tag "star.png", class:"star-icon" %>
+                   <span class='star-count'>0</span>
+                 </div>
+               </div>
+             </div>
+           <% end %>
+         </li>
+        <% end %>
+      <% end %>  
+
+       <%# 商品がない場合のダミー %>
+    <% unless @newfoods.presence %>
+      <li class='list'>
+        <%= link_to '#' do %>
+        <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
+        <div class='food-info'>
+          <h3 class='food-name'>
+            記事を投稿してね！
+          </h3>
+          <div class='food-price'>
+            <span>99999999円<br>(税込み)</span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+    <% end %>
+      <%# /商品がない場合のダミー %>
+    </ul>
+     <%= link_to '高評価ナカ食', "#", class: "subtitle" %>
+    <ul class='food-lists'>
+      <% if @goodfoods.presence %>
+        <% @goodfoods.each do |food| %>
+         <li class='list'>
+           <%= link_to food_path(food.id), method: :get do %>
+             <div class='food-img-content'>
+               <%= image_tag food.image, class: "food-img" if food.image.attached? %>
+               <div class=food-name>
+                 <span><%= food.user.name %>さん</span>
+               </div>
+             </div>
+             <div class='food-info'>
+               <h3 class='food-name'>
+                 <%= food.food_name %>
+               </h3>
+               <h4 class='food-name'>
+                 <%= food.restaurant %>
+               </h4> 
+               <div class='food-price'>
+                 <span><%= food.price %>円<br>(税込み)</span>
+                 <div class='star-btn'>
+                   <%= image_tag "star.png", class:"star-icon" %>
+                   <span class='star-count'>0</span>
+                 </div>
+               </div>
+             </div>
+           <% end %>
+         </li>
+        <% end %>
+      <% end %>  
+
+       <%# 商品がない場合のダミー %>
+    <% unless @goodfoods.presence %>
+      <li class='list'>
+        <%= link_to '#' do %>
+        <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
+        <div class='food-info'>
+          <h3 class='food-name'>
+            記事を投稿してね！
+          </h3>
+          <div class='food-price'>
+            <span>99999999円<br>(税込み)</span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+    <% end %>
+      <%# /商品がない場合のダミー %>
+    </ul>
+  </div>
+  <%# /商品一覧 %>
+</div>
+<div class='purchase-btn'>
+  <span class='purchase-btn-text'>投稿する</span>
+  <a href="/foods/new">
+    <%= image_tag 'folk_knife_icon.png' , size: '200x50' ,class: "purchase-btn-icon" %>
+  </a>
+</div>
+<%= render "shared/footer" %>

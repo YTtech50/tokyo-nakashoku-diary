@@ -1,0 +1,74 @@
+<%= render "shared/header" %>
+
+<div class='main'>
+  <%# 検索結果一覧 %>
+  <div class='food-contents'>
+    <h2 class='title'>検索結果一覧</h2>
+    <ul class='food-lists'>
+      <% if @foods.present? %>
+        <% @foods.each do |food| %>
+         <li class='list'>
+           <%= link_to food_path(food.id), method: :get do %>
+             <div class='food-img-content'>
+               <%= image_tag food.image, class: "food-img" if food.image.attached? %>
+               <div class=food-name>
+                 <span><%= food.user.name %>さん</span>
+               </div>
+             </div>
+             <div class='food-info'>
+               <h3 class='food-name'>
+                 <%= food.food_name %>
+               </h3>
+               <h4 class='food-name'>
+                 <%= food.restaurant %>
+               </h4> 
+               <div class='food-price'>
+                 <span><%= food.price %>円<br>(税込み)</span>
+                 <div class='star-btn'>
+                   <%= image_tag "star.png", class:"star-icon" %>
+                   <span class='star-count'>0</span>
+                 </div>
+               </div>
+             </div>
+           <% end %>
+         </li>
+         <% end %> 
+      <% else %>
+       入力されたキーワードでは見つかりませんでした
+      <% end %> 
+    </ul>
+    <ul class='food-lists'>
+      <% if @results.length !=0 %>
+       <% @results.each do |result| %>
+         <li class='list'>
+           <%= link_to food_path(result.id), method: :get do %>
+             <div class='food-img-content'>
+               <%= image_tag result.image, class: "food-img" if result.image.attached? %>
+               <div class=food-name>
+                 <span><%= result.user.name %>さん</span>
+               </div>
+             </div>
+             <div class='food-info'>
+               <h3 class='food-name'>
+                 <%= result.food_name %>
+               </h3>
+               <h4 class='food-name'>
+                 <%= result.restaurant %>
+               </h4> 
+               <div class='food-price'>
+                 <span><%= result.price %>円<br>(税込み)</span>
+                 <div class='star-btn'>
+                   <%= image_tag "star.png", class:"star-icon" %>
+                   <span class='star-count'>0</span>
+                 </div>
+               </div>
+             </div>
+           <% end %>
+         </li>
+        <% end %> 
+      <% else %>
+        該当するフードはありません 
+      <% end %>
+    </ul>
+  </div>
+</div>
